@@ -3,7 +3,8 @@
 " see: https://github.com/github/hub
 
 function! s:hub(cmd)
-	echo system("hub -C " . shellescape(expand("%:p:h")) . " " . a:cmd)
+	let cwd = getcwd()
+	echo system("cd " . shellescape(expand("%:p:h")) . " && hub " . a:cmd . " && cd " . cwd)
 endfunction
 
 command! -nargs=1 Hub call s:hub(<f-args>)
